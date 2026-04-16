@@ -124,29 +124,43 @@ main, header, footer {
 
   .menu-toggle {
     display: inline-block;
+    z-index: 10001;
   }
 
   .nav {
-    position: fixed;
-    top: 84px; /* locks under header */
+    position: fixed !important;
+    top: 84px;
     left: 1rem;
     right: 1rem;
 
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
+
+    padding: 1rem;
 
     background: var(--white);
     border: 1px solid rgba(0, 59, 116, 0.08);
     border-radius: 18px;
-    padding: 1rem;
-
     box-shadow: var(--shadow);
-    z-index: 9999;
+
+    z-index: 10000;
+
+    /* IMPORTANT: force hidden state properly */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    visibility: hidden;
+
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   }
 
   .nav.open {
-    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
   }
 }
 
