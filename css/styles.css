@@ -56,114 +56,62 @@ main, header, footer {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 9999;
-
-  background: rgba(0, 0, 247, 0.97);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(90, 121, 150, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* =========================
-   NAV FIX (ALWAYS TOP)
-========================= */
-
+/* wrapper must be relative so dropdown anchors correctly */
 .nav-wrap {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-
   min-height: 84px;
 }
 
-/* FIX: nav links positioning bug */
+/* desktop nav stays normal */
 .nav {
   display: flex;
   gap: 1.4rem;
   align-items: center;
-  position: relative;
 }
 
-.nav a {
-  font-weight: 600;
-  position: relative;
-}
-
-.nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.45rem;
-  width: 0;
-  height: 2px;
-  background: var(--bosch-red);
-  transition: width 0.25s ease;
-}
-
-.nav a:hover::after {
-  width: 100%;
-}
-
-/* =========================
-   MOBILE MENU FIX
-========================= */
-
-.menu-toggle {
-  display: none;
-  width: 46px;
-  height: 46px;
-  border: 1px solid var(--line);
-  background: var(--white);
-  border-radius: 12px;
-  padding: 0;
-  cursor: pointer;
-}
-
-/* IMPORTANT FIX: correct mobile dropdown */
+/* MOBILE FIXED DROPDOWN */
 @media (max-width: 900px) {
-
   .menu-toggle {
     display: inline-block;
-    z-index: 10001;
   }
 
   .nav {
-    position: fixed !important;
-    top: 84px;
-    left: 1rem;
-    right: 1rem;
+    position: absolute;
+    top: 100%;            /* ✅ key fix */
+    left: 0;
+    right: 0;
 
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
-
-    padding: 1rem;
 
     background: var(--white);
-    border: 1px solid rgba(0, 59, 116, 0.08);
-    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+
     box-shadow: var(--shadow);
-
-    z-index: 10000;
-
-    /* IMPORTANT: force hidden state properly */
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    visibility: hidden;
-
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 999;
   }
 
   .nav.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    visibility: visible;
+    display: flex;
+  }
+
+  .nav a {
+    padding: 0.75rem 0;
+    width: 100%;
   }
 }
-
 /* =========================
    KEEP EVERYTHING ELSE SAME
 ========================= */
