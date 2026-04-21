@@ -138,11 +138,7 @@ img {
 
 /* ================= SECTION BG FIX ================= */
 .section-bg::after {
-  background: linear-gradient(
-    180deg,
-    rgba(5, 7, 13, 0.9),
-    rgba(5, 7, 13, 0.95)
-  );
+  background: #040720;
 }
 
 /* ================= BUTTONS ================= */
